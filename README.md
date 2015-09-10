@@ -1,0 +1,1 @@
+Blackjack game written in Python3 and Kivy1.8.0

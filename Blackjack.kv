@@ -1,0 +1,117 @@
+
+<GameWindow>:
+
+    orientation: "vertical"
+    game_table:game_table
+    status:status
+    Table:
+        id: game_table
+
+        canvas:
+            Color:
+                rgba: 0,0.4,0.5,1
+            Rectangle:
+                size: self.size
+        Label:
+            id:lb
+            text:"awesome..."
+            font_size: 50
+
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height: 50
+        Button:
+            id: play_btn
+            text: "PLAY!"
+            on_release: root.start_game()
+
+        Button:
+            text: "STAT"
+            on_press: root.stat()
+
+    ScrollStatus:
+        size_hint_y: None
+        height: 100
+
+        canvas.before:
+            Color:
+                rgba: 0,0.4,0.5,1
+            Rectangle:
+                size: self.size
+
+        Label:
+            id: status
+            text_size: self.width,None
+            size_hint_y: None
+            height:self.texture_size[1]
+            text: "welcome to Yeehawk Blackjack! \n"
+
+<PlayerChoices>:
+
+    orientation: "horizontal"
+    size_hint_y: None
+    height: 50
+    Button:
+        id: hit_btn
+        text: "Hit"
+        on_release: app.root.player_move("H")
+    Button:
+        id: stand_btn
+        text: "Stand"
+        on_release: app.root.player_move("S")
+    Button:
+        id: split_btn
+        text: "Split"
+        on_release: app.root.player_move("SP")
+    Button:
+        id: double_btn
+        text: "Double"
+        on_release: app.root.player_move("D")
+    Button:
+        id: surrender_btn
+        text: "Surrender"
+        on_release: app.root.player_move("SU")
+
+
+<BetWindow>:
+    size_hint_y: None
+    height: 50
+    Label:
+        size_hint_x: 0.5
+        text: "Pls enter amount you want to bet:"
+    TextInput:
+        id: bet_amount
+        size_hint_x: 0.3
+        multiline: False
+        text: "100"
+    Button:
+        size_hint_x: 0.2
+        text: "OK"
+        on_release: app.root.bet(int(bet_amount.text),root)
+
+<HandPoint>:
+    text: "WOW"
+    # it is so important to give label a size!
+    size_hint: None, None
+    size: 100, 50
+    font_size: 18
+    canvas.before:
+        Color:
+            rgba: 0,1,0,0.5
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<HintLabel>:
+    font_size: 25
+    size_hint: 1, 0.1
+    pos: 0, 50
+
+    canvas.before:
+        Color:
+            rgba: self.hint_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
